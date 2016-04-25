@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* primeira versao
 void imprime_matriz(int ** mat, int n, int m, int *aux){
 
     if (n == 0)
@@ -20,6 +21,26 @@ void imprime_matriz(int ** mat, int n, int m, int *aux){
         imprime_matriz(mat, --n, --m, aux);
         }
 }        
+*/
+
+/* impressao em linha
+void imprime_matriz(int * mat, int n){
+    if (n == 0)
+        return;
+    imprime_matriz(mat, --n);
+    printf("%d ", *(mat+n));
+}
+*/
+
+void imprime_matriz(int * mat, int n, int m){
+    if (n == 0)
+        return;
+    imprime_matriz(mat, --n, m);
+    if ((n % m) == 0)
+        putchar('\n');
+    printf("%d ", *(mat+n));
+}
+
 
 
 int soma_matriz(int ** mat, int n, int m, int *aux){
@@ -49,7 +70,6 @@ int maior_matriz(int ** mat, int n, int m, int * aux){
            m = * aux;
            mat++;
            maior_matriz(mat, --n, m, aux);
-           return;
         }
         else
         {
@@ -121,19 +141,20 @@ int main(int argc, char * argv[]){
     
     }
 
+    imprime_matriz(&matriz[0][0], n*m, n);
     putchar('\n');
     printf("Soma da matriz: %d \n", soma_matriz(matriz, n*m, n, &n));
-    imprime_matriz(matriz, n*m, n, &n);
+//    imprime_matriz(matriz, n*m, n, &n);
     putchar('\n');
 
     printf("Maior da matriz: %d \n", maior_matriz(matriz, n*m, n, &n));
 
-    imprime_matriz(matriz, n*m, n, &n);
+//    imprime_matriz(matriz, n*m, n, &n);
     putchar('\n');
 
     printf("Menor da matriz: %d \n", menor_matriz(matriz, n*m, n, &n));
 
-    imprime_matriz(matriz, n*m, n, &n);
+//    imprime_matriz(matriz, n*m, n, &n);
     putchar('\n');
     return 0;
 }
